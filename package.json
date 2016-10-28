@@ -1,0 +1,41 @@
+{
+  "name": "vue-library-seed",
+  "version": "0.0.1",
+  "description": "Seed project for Vue 2.x component libraries.",
+  "main": "dist/vue-library-seed.js",
+  "repository": {
+    "url": "git@github.com:schuijers/vue-library-seed.git",
+    "type": "git"
+  },
+  "author": "Martijn Schuijers",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "~2.0.3"
+  },
+  "devDependencies": {
+    "babel-core": "~6.18.0",
+    "babel-loader": "~6.2.7",
+    "babel-preset-es2015": "~6.18.0",
+    "css-loader": "~0.25.0",
+    "del-cli": "~0.2.0",
+    "extract-text-webpack-plugin": "~v2.0.0-beta.4",
+    "html-webpack-plugin": "~2.24.0",
+    "npm-run-all": "~3.1.1",
+    "vue-html-loader": "~1.2.3",
+    "vue-loader": "~9.7.0",
+    "vue-style-loader": "~1.0.0",
+    "webpack": "~2.1.0-beta.25",
+    "webpack-dev-server": "~2.1.0-beta.9",
+    "webpack-merge": "~0.15.0"
+  },
+  "scripts": {
+    "build": "npm-run-all build:dist",
+    "build:dist": "webpack --env.dist",
+    "prebuild:dist": "npm-run-all clean",
+    "build:prod": "webpack --env.prod",
+    "prebuild:prod": "npm-run-all clean",
+    "clean": "del dist/*",
+    "serve": "webpack-dev-server --env.dev",
+    "start": "npm-run-all serve"
+  }
+}
