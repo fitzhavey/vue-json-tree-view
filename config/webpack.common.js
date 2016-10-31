@@ -31,7 +31,6 @@ module.exports = {
   },
   output: {
     path: path.resolve('./dist'),
-    publicPath: '/',
     sourceMapFilename: '[file].map'
   }
 };
