@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { assert } from 'chai';
 
-import Greeting from './Greeting.vue';
+import Greeting from '../../../src/components/greeting/Greeting.vue';
 
 describe('The Greeting component', () => {
   it('sets the correct default data', () => {

@@ -6,8 +6,26 @@ module.exports = function (config) {
     basePath: '',
     browsers: ['PhantomJS'],
     colors: true,
+    coverageReporter: {
+      dir: './reports/coverage',
+      reporters: [
+        {
+          type: 'html',
+          subdir: 'report-html'
+        },
+        {
+          type: 'lcov',
+          subdir: 'report-lcov'
+        },
+        {
+          type: 'cobertura',
+          subdir: '.',
+          file: 'cobertura.txt'
+        }
+      ]
+    },
     files: [{
-      pattern: './config/karma-shim.js',
+      pattern: './test/unit/index.js',
       watched: false
     }],
     frameworks: [
@@ -17,10 +35,11 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     port: 9876,
     preprocessors: { 
-      './config/karma-shim.js': ['webpack']
+      './test/unit/index.js': ['webpack']
     },
     reporters: [
-      'mocha'
+      'mocha',
+      'coverage'
     ],
     singleRun: true,
     webpack: webpackConfig,
