@@ -25,7 +25,7 @@ module.exports = function (config) {
       ]
     },
     files: [{
-      pattern: './test/unit/index.js',
+      pattern: './config/karma-shim.js',
       watched: false
     }],
     frameworks: [
@@ -35,7 +35,7 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     port: 9876,
     preprocessors: { 
-      './test/unit/index.js': ['webpack']
+      './config/karma-shim.js': ['webpack']
     },
     reporters: [
       'mocha',
