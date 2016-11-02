@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = webpackMerge(commonConfig, {
   devServer: {
-    contentBase: "./demo-app",
+    contentBase: './demo-app',
     historyApiFallback: true,
     hot: true,
     inline: true,
@@ -23,11 +23,16 @@ module.exports = webpackMerge(commonConfig, {
     ]
   },
   output: {
-    chunkFilename: '[id].chunk.js',    
-    filename: '[name].bundle.js',    
+    chunkFilename: '[id].chunk.js',
+    filename: '[name].bundle.js',
     publicPath: 'http://localhost:4200/'
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"development"'
+      }
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',

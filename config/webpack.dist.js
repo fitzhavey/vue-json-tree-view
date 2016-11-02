@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = webpackMerge(config, {
   bail: true,

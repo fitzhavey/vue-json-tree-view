@@ -20,7 +20,7 @@
     data () {
       return {
         name: 'world'
-      }
+      };
     },
     computed: {
       englishGreeting () {
@@ -30,7 +30,7 @@
         return `Hola ${this.name}`;
       }
     }
-  }
+  };
 </script>
 
 <style scoped>
