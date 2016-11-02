@@ -8,3 +8,8 @@ Built with:
 * Vue 2.x
 * ES6
 * Webpack 2
+
+Tested with:
+* Karma
+* Mocha
+* Chai
