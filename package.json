@@ -10,7 +10,7 @@
   "author": "Martijn Schuijers",
   "license": "MIT",
   "dependencies": {
-    "vue": "~2.0.3"
+    "vue": "~2.0.5"
   },
   "devDependencies": {
     "babel-core": "~6.18.0",
@@ -38,6 +38,10 @@
     "karma-webpack": "~1.8.0",
     "mocha": "~3.1.2",
     "npm-run-all": "~3.1.1",
+    "postcss-loader": "~1.1.0",
+    "stylelint": "~7.5.0",
+    "stylelint-config-standard": "~14.0.0",
+    "stylelint-processor-html": "~1.0.0",
     "vue-html-loader": "~1.2.3",
     "vue-loader": "~9.7.0",
     "vue-style-loader": "~1.0.0",
@@ -48,11 +52,13 @@
   "scripts": {
     "build": "npm-run-all build:dist",
     "build:dist": "webpack --env.dist",
-    "prebuild:dist": "npm-run-all clean",
+    "prebuild:dist": "npm-run-all clean lint test",
     "build:prod": "webpack --env.prod",
-    "prebuild:prod": "npm-run-all clean",
+    "prebuild:prod": "npm-run-all clean lint test",
     "clean": "del dist/*",
-    "lint": "eslint --ext .js,.vue config src",
+    "lint": "npm-run-all --parallel lint:*",
+    "lint:css": "stylelint demo-app/**/*.css demo-app/**/*.vue src/**/*.css src/**/*.vue",
+    "lint:js": "eslint --ext .js,.vue config demo-app src",
     "serve": "webpack-dev-server --env.dev",
     "start": "npm-run-all serve",
     "test": "karma start",

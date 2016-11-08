@@ -12,14 +12,16 @@ module.exports = {
   module: {
     rules: [
       {
-        enforce: 'pre',
-        test: /.js|.vue$/,
-        loader: 'eslint',
-        exclude: /node_modules/
-      },
-      {
         test: /\.vue$/,
-        loader: 'vue'
+        loader: 'vue',
+        options: {
+          loaders: {
+            css: ExtractTextPlugin.extract({
+              fallbackLoader: 'vue-style-loader',
+              loader: 'css?sourceMap'
+            })
+          }
+        }
       },
       {
         test: /\.js$/,
@@ -30,7 +32,7 @@ module.exports = {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'vue-style-loader',
-          loader: 'css?sourceMap'
+          loader: 'css?sourceMap&importLoaders=1!postcss'
         })
       }
     ]

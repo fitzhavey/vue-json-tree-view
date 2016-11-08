@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = webpackMerge(commonConfig, {
+const webpackConfig = webpackMerge(commonConfig, {
   devServer: {
     contentBase: './demo-app',
     historyApiFallback: true,
@@ -44,3 +44,12 @@ module.exports = webpackMerge(commonConfig, {
     })
   ]
 });
+
+webpackConfig.module.rules.push({
+  enforce: 'pre',
+  test: /.js|.vue$/,
+  loader: 'eslint',
+  exclude: /node_modules/
+});
+
+module.exports = webpackConfig;
