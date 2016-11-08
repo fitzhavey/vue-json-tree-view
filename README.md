@@ -9,6 +9,10 @@ Built with:
 * ES6
 * Webpack 2
 
+Linted with:
+* ESLint
+* Stylelint
+
 Tested with:
 * Karma
 * Mocha
