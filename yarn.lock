@@ -1963,9 +1963,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-vue@~2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-vue/-/eslint-config-vue-2.0.0.tgz#c72364031713c101b987a6b2291f959afae26973"
+eslint-config-vue@~2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-vue/-/eslint-config-vue-2.0.1.tgz#da872f1399c7812aa2ce3fc2dd26f83a31f33b4f"
 
 eslint-loader@~1.6.1:
   version "1.6.1"
@@ -1976,15 +1976,9 @@ eslint-loader@~1.6.1:
     object-assign "^4.0.1"
     object-hash "^1.1.4"
 
-eslint-plugin-html@^1.5.2:
+eslint-plugin-html@^1.5.2, eslint-plugin-html@~1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-html/-/eslint-plugin-html-1.6.0.tgz#81f38bec0f212b19cba60e6a7f5852b7c269ec5f"
-  dependencies:
-    htmlparser2 "^3.8.2"
-
-eslint-plugin-html@~1.5.5:
-  version "1.5.5"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-html/-/eslint-plugin-html-1.5.5.tgz#5959f19f1b1d71d01f7d422dc9b20d8f5b85f550"
   dependencies:
     htmlparser2 "^3.8.2"
 
@@ -3291,9 +3285,11 @@ karma-mocha-reporter@~2.2.0:
   dependencies:
     chalk "1.1.3"
 
-karma-mocha@~1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/karma-mocha/-/karma-mocha-1.2.0.tgz#bca6be2a66805b847417e8d2873fd0b5b27ee7cd"
+karma-mocha@~1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/karma-mocha/-/karma-mocha-1.3.0.tgz#eeaac7ffc0e201eb63c467440d2b69c7cf3778bf"
+  dependencies:
+    minimist "1.2.0"
 
 karma-phantomjs-launcher@~1.0.2:
   version "1.0.2"
@@ -3806,7 +3802,7 @@ minimatch@^3.0.0, minimatch@^3.0.2, "minimatch@2 || 3":
   dependencies:
     brace-expansion "^1.0.0"
 
-minimist@^1.1.0, minimist@^1.1.3, minimist@^1.2.0:
+minimist@^1.1.0, minimist@^1.1.3, minimist@^1.2.0, minimist@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
 
@@ -5943,9 +5939,9 @@ vue-html-loader@~1.2.3:
     loader-utils "^0.2.15"
     object-assign "^4.1.0"
 
-vue-loader@~9.7.0:
-  version "9.7.0"
-  resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-9.7.0.tgz#9a7573c96fe17ca312c18e2ee1aff54e4d6a71f3"
+vue-loader@~9.8.1:
+  version "9.8.1"
+  resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-9.8.1.tgz#40dde1cb7fdb2d8e4718df6acfa7f679bf30fcb9"
   dependencies:
     consolidate "^0.14.0"
     hash-sum "^1.0.2"
@@ -5958,7 +5954,7 @@ vue-loader@~9.7.0:
     source-map "^0.5.6"
     vue-hot-reload-api "^2.0.1"
     vue-style-loader "^1.0.0"
-    vue-template-compiler "^2.0.0-rc.3"
+    vue-template-compiler "^2.0.4"
     vue-template-es2015-compiler "^1.0.0"
 
 vue-style-loader@^1.0.0, vue-style-loader@~1.0.0:
@@ -5967,7 +5963,7 @@ vue-style-loader@^1.0.0, vue-style-loader@~1.0.0:
   dependencies:
     loader-utils "^0.2.7"
 
-vue-template-compiler@^2.0.0-rc.3:
+vue-template-compiler@^2.0.4:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.0.5.tgz#6a8c454e7d4ed03cc295ae9733a432e31df25ea3"
   dependencies:
