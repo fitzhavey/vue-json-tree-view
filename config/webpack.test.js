@@ -14,10 +14,10 @@ const webpackConfig = webpackMerge(commonConfig, {
 });
 
 webpackConfig.module.rules.forEach(function (loader) {
-  if (loader.loader === 'vue') {
+  if (loader.loader === 'vue-loader') {
     loader.options = {
       loaders: {
-        js: 'babel?plugins[]=istanbul'
+        js: 'babel-loader?plugins[]=istanbul'
       }
     };
   }
@@ -26,7 +26,7 @@ webpackConfig.module.rules.forEach(function (loader) {
 webpackConfig.module.rules.push({
   enforce: 'post',
   test: /\.vue$/,
-  loader: 'istanbul-instrumenter'
+  loader: 'istanbul-instrumenter-loader'
 });
 
 module.exports = webpackConfig;
