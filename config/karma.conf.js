@@ -7,20 +7,17 @@ module.exports = function (config) {
     browsers: ['PhantomJS'],
     colors: true,
     coverageReporter: {
-      dir: './reports/coverage',
+      dir: './coverage',
       reporters: [
         {
           type: 'html',
-          subdir: 'report-html'
+          subdir: function (browser) {
+            return browser + '/html';
+          }
         },
         {
-          type: 'lcov',
-          subdir: 'report-lcov'
-        },
-        {
-          type: 'cobertura',
-          subdir: '.',
-          file: 'cobertura.txt'
+          type: 'lcovonly',
+          file: 'lcovonly'
         }
       ]
     },
