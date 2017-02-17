@@ -4,7 +4,7 @@
   "description": "A JSON Tree View Component.",
   "main": "dist/vue-json-tree-view.js",
   "repository": {
-    "url": "git@github.com:arvidkahl/vue-jston-tree-view.git",
+    "url": "git@github.com:arvidkahl/vue-json-tree-view.git",
     "type": "git"
   },
   "author": "Arvid Kahl <arvid.kahl@digimondo.de>",
