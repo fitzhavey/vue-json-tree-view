@@ -1,3 +1,2 @@
-# vue-json-tree-view
-
-A JSON Tree View Component.
+# vue-component-seed
+A seed for vue component
