@@ -1,6 +1,6 @@
 {
   "name": "vue-json-tree-view",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "description": "a JSON Tree View Component in Vue.js",
   "main": "./dist/vue-json-tree-view.min.js",
   "scripts": {
