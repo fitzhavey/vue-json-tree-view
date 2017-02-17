@@ -65,8 +65,10 @@
         if (_.isNull(value.value)) {
         	return "null"
         }
-        if (_.isString(value.value)) {}
-      	return "\""+value.value+"\"";
+        if (_.isString(value.value)) {
+          return "\""+value.value+"\"";
+        }
+      	return value.value;
       },
       isRootObject: function(value){
       	return value.isRoot;
