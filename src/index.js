@@ -7,7 +7,8 @@ export const components = {
 };
 
 export default {
-  install (Vue) {
+  install: (Vue) => {
+    console.log("Installing Components", components)
     Object.keys(components).forEach((name) => {
       Vue.component(name, components[name]);
     });
@@ -17,3 +18,10 @@ export default {
 export {
   TreeView
 };
+
+// module.exports = {
+// 	install: (Vue) => {
+// 		Vue.component("TreeViewItem", TreeViewItem);
+// 		Vue.component("TreeView", TreeView);
+// 	}
+// };
