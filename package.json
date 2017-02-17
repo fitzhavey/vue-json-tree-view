@@ -1,6 +1,6 @@
 {
-  "name": "vue-library-seed",
-  "version": "0.1.0",
+  "name": "vue-json-tree-view",
+  "version": "0.2.0",
   "description": "A JSON Tree View Component.",
   "main": "dist/vue-json-tree-view.js",
   "repository": {
