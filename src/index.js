@@ -14,10 +14,10 @@ export default {
     });
   }
 };
-
-export {
-  TreeView
-};
+// 
+// export {
+//   TreeView
+// };
 
 // module.exports = {
 // 	install: (Vue) => {
