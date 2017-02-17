@@ -1,7 +1,9 @@
-import Greeting from './components/greeting/Greeting.vue';
+import TreeViewItem from './components/tree-view/TreeViewItem.vue';
+import TreeView from './components/tree-view/TreeView.vue';
 
 export const components = {
-  Greeting
+  TreeViewItem,
+  TreeView
 };
 
 export default {
@@ -13,5 +15,5 @@ export default {
 };
 
 export {
-  Greeting
+  TreeView
 };

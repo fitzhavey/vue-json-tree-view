@@ -9,7 +9,7 @@ module.exports = webpackMerge(config, {
   devtool: 'source-map',
   entry: './src/index.js',
   output: {
-    filename: 'vue-library-seed.js',
+    filename: 'vue-json-tree-view.js',
     pathinfo: false
   },
   plugins: [
@@ -31,6 +31,6 @@ module.exports = webpackMerge(config, {
       debug: false,
       minimize: true
     }),
-    new ExtractTextPlugin('vue-library-seed.css')
+    new ExtractTextPlugin('vue-json-tree-view.css')
   ]
 });

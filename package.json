@@ -1,15 +1,16 @@
 {
   "name": "vue-library-seed",
   "version": "0.1.0",
-  "description": "Seed project for Vue 2.x component libraries.",
-  "main": "dist/vue-library-seed.js",
+  "description": "A JSON Tree View Component.",
+  "main": "dist/vue-json-tree-view.js",
   "repository": {
-    "url": "git@github.com:schuijers/vue-library-seed.git",
+    "url": "git@github.com:arvidkahl/vue-jston-tree-view.git",
     "type": "git"
   },
-  "author": "Martijn Schuijers",
+  "author": "Arvid Kahl <arvid.kahl@digimondo.de>",
   "license": "MIT",
   "dependencies": {
+    "lodash": "^4.17.4",
     "vue": "~2.1.3"
   },
   "devDependencies": {
@@ -53,13 +54,10 @@
   "scripts": {
     "build": "npm-run-all build:dist",
     "build:dist": "webpack --env.dist",
-    "prebuild:dist": "npm-run-all clean lint test",
+    "prebuild:dist": "npm-run-all clean",
     "build:prod": "webpack --env.prod",
-    "prebuild:prod": "npm-run-all clean lint test",
+    "prebuild:prod": "npm-run-all clean",
     "clean": "del dist/*",
-    "lint": "npm-run-all --parallel lint:*",
-    "lint:css": "stylelint demo-app/**/*.css demo-app/**/*.vue src/**/*.css src/**/*.vue",
-    "lint:js": "eslint --ext .js,.vue config demo-app src",
     "serve": "webpack-dev-server --env.dev",
     "start": "npm-run-all serve",
     "test": "karma start",

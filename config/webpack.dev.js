@@ -45,11 +45,11 @@ const webpackConfig = webpackMerge(commonConfig, {
   ]
 });
 
-webpackConfig.module.rules.push({
-  enforce: 'pre',
-  test: /.js|.vue$/,
-  loader: 'eslint-loader',
-  exclude: /node_modules/
-});
+// webpackConfig.module.rules.push({
+//   enforce: 'pre',
+//   test: /.js|.vue$/,
+//   loader: 'eslint-loader',
+//   exclude: /node_modules/
+// });
 
 module.exports = webpackConfig;
