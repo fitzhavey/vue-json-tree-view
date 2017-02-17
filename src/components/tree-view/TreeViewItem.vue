@@ -1,5 +1,3 @@
-Vue.component("tree-view-item", Vue.extend());
-
 <template>
   <div class="tree-view-item">
     <div v-if="isObject(data)" class="tree-view-item-leaf">
@@ -26,6 +24,9 @@ Vue.component("tree-view-item", Vue.extend());
 </template>
 
 <script>
+
+  import _ from 'lodash'
+
   export default {
   	name: "tree-view-item",
     props: ["data", "max-depth", "current-depth"],

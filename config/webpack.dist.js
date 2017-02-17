@@ -18,19 +18,19 @@ module.exports = webpackMerge(config, {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      output: {
-        comments: false
-      },
-      sourceMap: true
-    }),
-    new webpack.LoaderOptionsPlugin({
-      debug: false,
-      minimize: true
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   },
+    //   output: {
+    //     comments: false
+    //   },
+    //   sourceMap: true
+    // }),
+    // new webpack.LoaderOptionsPlugin({
+    //   debug: false,
+    //   minimize: true
+    // }),
     new ExtractTextPlugin('vue-json-tree-view.css')
   ]
 });
