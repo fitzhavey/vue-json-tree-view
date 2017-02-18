@@ -1,6 +1,11 @@
 {
   "name": "vue-json-tree-view",
-  "version": "0.16.0",
+  "version": "1.0.0",
+  "homepage": "https://github.com/arvidkahl/vue-json-tree-view",
+  "bugs": {
+    "url": "https://github.com/arvidkahl/vue-json-tree-view/issues",
+    "email": "arvid.kahl@digimondo.de"
+  },
   "description": "a JSON Tree View Component in Vue.js",
   "main": "./dist/vue-json-tree-view.min.js",
   "scripts": {
