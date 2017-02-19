@@ -1,8 +1,8 @@
 <template>
   <div class="tree-view-item">
     <div v-if="isObject(data)" class="tree-view-item-leaf">
-      <div class="tree-view-item-node" @click.stop="toggleOpen()">
-        <span :class="{opened: isOpen()}" v-if="!isRootObject(data)" class="tree-view-item-key tree-view-item-key-with-chevron">{{getKey(data)}}</span>
+      <div class="tree-view-item-node" @click.stop="toggleOpen()" >
+        <span :class="{opened: isOpen()}" class="tree-view-item-key tree-view-item-key-with-chevron">{{getKey(data)}}</span>
         <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length === 1">{{data.children.length}} property</span>
         <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length !== 1">{{data.children.length}} properties</span>
       </div>
@@ -10,7 +10,7 @@
     </div>
     <div v-if="isArray(data)" class="tree-view-item-leaf">
       <div class="tree-view-item-node" @click.stop="toggleOpen()">
-        <span :class="{opened: isOpen()}" v-if="!isRootObject(data)" class="tree-view-item-key tree-view-item-key-with-chevron">{{getKey(data)}}</span>
+        <span :class="{opened: isOpen()}"  class="tree-view-item-key tree-view-item-key-with-chevron">{{getKey(data)}}</span>
         <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length === 1">{{data.children.length}} item</span>
         <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length !== 1">{{data.children.length}} items</span>
       </div>
@@ -18,7 +18,7 @@
     </div>
     <div class="tree-view-item-leaf" v-if="isValue(data)">
       <span class="tree-view-item-key">{{getKey(data)}}</span>
-      <span class="tree-view-item-value">{{getValue(data)}}
+      <span class="tree-view-item-value" :class="getValueType(data)">{{getValue(data)}}
     </div>
   </div>
 </template>
@@ -36,8 +36,8 @@
       }
     },
     methods: {
-    	isOpen: function(){
-      	return this.isRootObject(this.data) || this.open;
+      isOpen: function(){
+      	return this.open;
       },
       toggleOpen:function(){
       	this.open = !this.open;
@@ -70,7 +70,29 @@
         }
       	return value.value;
       },
-      isRootObject: function(value){
+      getValueType: function(value){
+
+        var prefix= "tree-view-item-value-";
+
+        if (_.isNumber(value.value)) {
+          return prefix + "number"
+        }
+        if (_.isFunction(value.value)) {
+          return prefix + "function"
+        }
+        if (_.isBoolean(value.value)) {
+          return prefix + "boolean"
+        }
+        if (_.isNull(value.value)) {
+          return prefix + "null"
+        }
+        if (_.isString(value.value)) {
+          return prefix + "string";
+        }
+        return prefix + "unknown";
+
+      },
+      isRootObject: function(value = this.data){
       	return value.isRoot;
       }
     }

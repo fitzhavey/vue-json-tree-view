@@ -34,10 +34,27 @@ Put the `tree-view` element into your  HTML where you want the Tree View to appe
 
 The JSON to be displayed. Expects a valid JSON object.
 
-#### `max-depth`
+#### `options`
 
-The maximum number of levels of the JSON Tree that should be expanded by default. Expects an Integer from 0 to Infinity.
+The defaults are:
+```
+{
+  maxDepth: 4,
+  rootObjectKey: "root"
+}
+```
+- maxDepth: The maximum number of levels of the JSON Tree that should be expanded by default. Expects an Integer from 0 to Infinity.
+- rootObjectKey: the name of the Root Object, will default to `root`
+
+## Custom Styling
+
+All leaves will have their type indicated as a CSS class, like `tree-view-item-value-string`. Supported types: String, Number, Function, Boolean and Null Values.
 
 ## Notes
 
 Enjoy.
+
+## Changelog
+
+- 2.0.0: Moved prop based option into `options` object. Added CSS for leaf types. Support for raw values as data.
+- 1.0.0: Initial Release
