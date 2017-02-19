@@ -1,5 +1,7 @@
 # Vue JSON Tree View
 
+![a demonstration](header.png)
+
 ## Demo and Blogpost
 
 You can check out the [demo](https://jsfiddle.net/arvidkahl/kwo6vk9d/11/) on JSFiddle and read the Blogpost called [Building a JSON Tree View Component in Vue.js from Scratch in Six Steps](https://devblog.digimondo.io/building-a-json-tree-view-component-in-vue-js-from-scratch-in-six-steps-ce0c05c2fdd8#.dkwh4jo2m) that lead to the creation of this library.
