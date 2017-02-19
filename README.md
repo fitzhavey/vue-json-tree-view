@@ -1,6 +1,7 @@
 # Vue JSON Tree View
 
-![a demonstration](header.png)
+![a demonstration](https://raw.githubusercontent.com/arvidkahl/vue-json-tree-view/master/header.png)
+
 
 ## Demo and Blogpost
 
