@@ -27,7 +27,7 @@ Done.
 Put the `tree-view` element into your  HTML where you want the Tree View to appear.
 ```html
 <div>
-  <tree-view :data="jsonSource" max-depth="3"></tree-view>
+  <tree-view :data="jsonSource" :options="{maxDepth: 3}"></tree-view>
 </div>
 ```
 
