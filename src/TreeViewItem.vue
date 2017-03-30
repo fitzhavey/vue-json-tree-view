@@ -18,7 +18,7 @@
     </div>
     <div class="tree-view-item-leaf" v-if="isValue(data)">
       <span class="tree-view-item-key">{{getKey(data)}}</span>
-      <span class="tree-view-item-value" :class="getValueType(data)">{{getValue(data)}}
+      <span class="tree-view-item-value" :class="getValueType(data)">{{getValue(data)}}</span>
     </div>
   </div>
 </template>
