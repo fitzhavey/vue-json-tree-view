@@ -61,6 +61,17 @@
                 <tree-view :data="sampleJSON" :options="{maxDepth: 2}"></tree-view>
               </div>
             </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <h2>Max Depth set to 2, modifiable</h2>
+                <pre><code>{{sampleJSON}}</code></pre>
+              </div>
+              <div class="col-sm-6">
+                <tree-view :data="sampleJSON" :options="{maxDepth: 2, modifiable: true}"></tree-view>
+              </div>
+            </div>
+
         </div>
         <script type="text/javascript" src="/build/build.js"></script>
     </body>
