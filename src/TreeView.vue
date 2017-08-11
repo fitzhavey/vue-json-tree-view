@@ -1,6 +1,7 @@
 <template>
   <div class="tree-view-wrapper">
-    <tree-view-item class="tree-view-item-root" :data="parsedData" :max-depth="allOptions.maxDepth" :current-depth="0" :modifiable="allOptions.modifiable"></tree-view-item>
+    <button type="button" v-if="allOptions.modifiable" @click.prevent="onSave">save</button>
+    <tree-view-item class="tree-view-item-root" :data="parsedData" :max-depth="allOptions.maxDepth" :current-depth="0" :modifiable="allOptions.modifiable" @change-data="onChangeData"></tree-view-item>
   </div>
 </template>
 
@@ -73,7 +74,28 @@
 
       isValue: function(value){
       	return !this.isObject(value) && !this.isArray(value);
-      }
+      },
+
+      onSave: function(e){
+        console.log(this.data)
+      },
+
+      onChangeData: function(path, value) {
+        let lastKey = _.last(path)
+        path = _.dropRight(_.drop(path))
+        
+        let data = this.data
+        _.forEach(path, (key) => {
+          data = data[key]
+        })
+        
+        data[lastKey] = value
+        this.notifyDataChanged(this)
+      },
+
+      notifyDataChanged: _.debounce((self) => {
+        self.$emit('change-data', self.data)
+      }, 2000)
     },
     computed: {
       allOptions: function(){

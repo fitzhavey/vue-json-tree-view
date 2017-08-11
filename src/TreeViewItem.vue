@@ -6,7 +6,7 @@
         <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length === 1">{{data.children.length}} property</span>
         <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length !== 1">{{data.children.length}} properties</span>
       </div>
-      <tree-view-item :key="getKey(data)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-show="isOpen()" v-for="child in data.children" :data="child" :modifiable="modifiable"></tree-view-item>
+      <tree-view-item :key="getKey(data)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-show="isOpen()" v-for="child in data.children" :data="child" :modifiable="modifiable" @change-data="onChangeData"></tree-view-item>
     </div>
     <div v-if="isArray(data)" class="tree-view-item-leaf">
       <div class="tree-view-item-node" @click.stop="toggleOpen()">
@@ -14,11 +14,11 @@
         <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length === 1">{{data.children.length}} item</span>
         <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length !== 1">{{data.children.length}} items</span>
       </div>
-      <tree-view-item :key="getKey(data)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-show="isOpen()" v-for="child in data.children" :data="child" :modifiable="modifiable"></tree-view-item>
+      <tree-view-item :key="getKey(data)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-show="isOpen()" v-for="child in data.children" :data="child" :modifiable="modifiable" @change-data="onChangeData"></tree-view-item>
     </div>
     <div class="tree-view-item-leaf" v-if="isValue(data)">
       <span class="tree-view-item-key">{{getKey(data)}}</span>
-      <tree-view-item-value class="tree-view-item-value" :class="getValueType(data)" :data="getValue(data)" :modifiable="modifiable"></tree-view-item-value>
+      <tree-view-item-value class="tree-view-item-value" :class="getValueType(data)" :data="getValue(data)" :dataType="getValueType(data, '')" :modifiable="modifiable" @change-data="onChangeData"></tree-view-item-value>
     </div>
   </div>
 </template>
@@ -28,6 +28,9 @@
   import TreeViewItemValue from './TreeViewItemValue.vue'
 
   export default {
+    components: {
+      TreeViewItemValue
+    },
   	name: "tree-view-item",
     props: ["data", "max-depth", "current-depth", "modifiable"],
     data: function(){
@@ -70,10 +73,7 @@
         }
       	return value.value;
       },
-      getValueType: function(value){
-
-        var prefix= "tree-view-item-value-";
-
+      getValueType: function(value, prefix="tree-view-item-value-"){
         if (_.isNumber(value.value)) {
           return prefix + "number"
         }
@@ -94,10 +94,11 @@
       },
       isRootObject: function(value = this.data){
       	return value.isRoot;
+      },
+      onChangeData: function(path, value) {
+        path = _.concat(this.data.key, path)        
+        this.$emit('change-data', path, value)
       }
-    },
-    components: {
-      TreeViewItemValue
     }
   };
 </script>

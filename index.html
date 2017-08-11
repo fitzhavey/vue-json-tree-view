@@ -64,11 +64,11 @@
 
             <div class="row">
               <div class="col-sm-6">
-                <h2>Max Depth set to 2, modifiable</h2>
+                <h2>Modifiable</h2>
                 <pre><code>{{sampleJSON}}</code></pre>
               </div>
               <div class="col-sm-6">
-                <tree-view :data="sampleJSON" :options="{maxDepth: 2, modifiable: true}"></tree-view>
+                <tree-view :data="sampleJSON" :options="{modifiable: true}" v-on:change-data="console.log('change data')"></tree-view>
               </div>
             </div>
 
