@@ -1,13 +1,12 @@
 <template>
   <div class="tree-view-wrapper">
-    <button type="button" v-if="allOptions.modifiable" @click.prevent="onSave">save</button>
     <tree-view-item class="tree-view-item-root" :data="parsedData" :max-depth="allOptions.maxDepth" :current-depth="0" :modifiable="allOptions.modifiable" @change-data="onChangeData"></tree-view-item>
   </div>
 </template>
 
 <script>
-  import _ from 'lodash';
-  import TreeViewItem from './TreeViewItem.vue';
+  import _ from 'lodash'
+  import TreeViewItem from './TreeViewItem.vue'
 
   export default {
     components:{
@@ -76,10 +75,6 @@
       	return !this.isObject(value) && !this.isArray(value);
       },
 
-      onSave: function(e){
-        console.log(this.data)
-      },
-
       onChangeData: function(path, value) {
         let lastKey = _.last(path)
         path = _.dropRight(_.drop(path))
@@ -89,13 +84,11 @@
           data = data[key]
         })
         
-        data[lastKey] = value
-        this.notifyDataChanged(this)
+        if (data[lastKey] != value) {
+          data[lastKey] = value
+          this.$emit('change-data', this.data)
+        }
       },
-
-      notifyDataChanged: _.debounce((self) => {
-        self.$emit('change-data', self.data)
-      }, 2000)
     },
     computed: {
       allOptions: function(){

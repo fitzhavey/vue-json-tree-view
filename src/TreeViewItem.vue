@@ -16,10 +16,8 @@
       </div>
       <tree-view-item :key="getKey(data)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-show="isOpen()" v-for="child in data.children" :data="child" :modifiable="modifiable" @change-data="onChangeData"></tree-view-item>
     </div>
-    <div class="tree-view-item-leaf" v-if="isValue(data)">
-      <span class="tree-view-item-key">{{getKey(data)}}</span>
-      <tree-view-item-value class="tree-view-item-value" :class="getValueType(data)" :data="getValue(data)" :dataType="getValueType(data, '')" :modifiable="modifiable" @change-data="onChangeData"></tree-view-item-value>
-    </div>
+    <tree-view-item-value v-if="isValue(data)" class="tree-view-item-leaf" :key-string="getKey(data)" :data="data" :modifiable="modifiable" @change-data="onChangeData">
+    </tree-view-item-value>
   </div>
 </template>
 
@@ -60,37 +58,6 @@
         } else {
   	      return "\""+ value.key + "\":";
         }
-      },
-      getValue: function(value){
-      	if (_.isNumber(value.value)) {
-        	return value.value
-        }
-        if (_.isNull(value.value)) {
-        	return "null"
-        }
-        if (_.isString(value.value)) {
-          return "\""+value.value+"\"";
-        }
-      	return value.value;
-      },
-      getValueType: function(value, prefix="tree-view-item-value-"){
-        if (_.isNumber(value.value)) {
-          return prefix + "number"
-        }
-        if (_.isFunction(value.value)) {
-          return prefix + "function"
-        }
-        if (_.isBoolean(value.value)) {
-          return prefix + "boolean"
-        }
-        if (_.isNull(value.value)) {
-          return prefix + "null"
-        }
-        if (_.isString(value.value)) {
-          return prefix + "string";
-        }
-        return prefix + "unknown";
-
       },
       isRootObject: function(value = this.data){
       	return value.isRoot;

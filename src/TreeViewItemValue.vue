@@ -1,6 +1,10 @@
 <template>
-	<input v-model="value" v-if="modifiable">
-	<span v-else>{{ value }}</span>
+  <div>
+    <span class="tree-view-item-key">{{keyString}}</span>
+    <input v-if="modifiable" class="tree-view-item-value" :class="getValueType(data)" v-model="valueString" @keyup.enter="onUpdateData" @blur="onUpdateData">
+    <span v-else class="tree-view-item-value" :class="getValueType(data)">{{ valueFormed }}</span>
+    <span v-show="error">{{ error }}</span>
+  </div>
 </template>
 
 
@@ -8,32 +12,82 @@
 import _ from 'lodash'
 
 export default {
-  	name: 'tree-view-item',
-    props: ['data', 'modifiable', 'dataType'],
-    data: function(){
-    	return {
-    		value: this.data
-    	}
-    },
-    watch: {
-      value: function(v) {
-        this.$emit('change-data', [], this.typedValue(v))
-      }
-    },
-    methods: {
-      typedValue: function(v) {
-        switch (this.dataType) {
-          case 'number':
-            return _.toNumber(v)
-          case 'boolean':
-            if (v == 'true') { return true }
-            if (v == 'false') { return false }
-            return false
-          case 'string':
-          default:
-            return v
-        }
-      }
+	name: 'tree-view-item',
+  props: ['data', 'modifiable', 'key-string'],
+  data: function(){
+  	return {
+  		valueString: this.data.value.toString(),
+      error: false,
+  	}
+  },
+  computed: {
+    valueFormed: function () {
+      return this.getValue(this.data)
     }
+  },
+  methods: {
+    onUpdateData: function() {
+      try {
+        let v = this.typedValue(this.valueString)
+        this.error = false
+        this.$emit('change-data', [], v)
+      }
+      catch (err) {
+        this.error = err
+      }
+    },
+    typedValue: function(v) {
+      console.log(v)
+      if (v == '') { throw 'empty' }
+
+      let dataType = this.getValueType(this.data, '')
+
+      switch (dataType) {
+        case 'number':
+          if (_.isNaN(_.toNumber(v))) {
+            throw 'only number'
+          }
+          return _.toNumber(v)
+        case 'boolean':
+          if (v.toLowerCase() === 'true') { return true }
+          if (v.toLowerCase() === 'false') { return false }
+          throw 'true or false'
+        case 'string':
+        default:
+          return v
+      }
+    },
+    getValue: function(value){
+      if (_.isNumber(value.value)) {
+        return value.value
+      }
+      if (_.isNull(value.value)) {
+        return "null"
+      }
+      if (_.isString(value.value)) {
+        return "\""+value.value+"\"";
+      }
+      return value.value;
+    },
+    getValueType: function(value, prefix="tree-view-item-value-"){
+      if (_.isNumber(value.value)) {
+        return prefix + "number"
+      }
+      if (_.isFunction(value.value)) {
+        return prefix + "function"
+      }
+      if (_.isBoolean(value.value)) {
+        return prefix + "boolean"
+      }
+      if (_.isNull(value.value)) {
+        return prefix + "null"
+      }
+      if (_.isString(value.value)) {
+        return prefix + "string";
+      }
+      return prefix + "unknown";
+
+    },
+  }
 }
 </script>
