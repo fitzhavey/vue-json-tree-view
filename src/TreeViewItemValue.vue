@@ -16,7 +16,7 @@ export default {
   props: ['data', 'modifiable', 'key-string'],
   data: function(){
   	return {
-  		valueString: this.data.toString(),
+  		valueString: this.data && this.data.toString(),
       error: false,
   	}
   },
