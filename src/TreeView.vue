@@ -79,14 +79,15 @@
         let lastKey = _.last(path)
         path = _.dropRight(_.drop(path))
         
-        let data = this.data
+        let data = _.cloneDeep(this.data)
+        let targetObject = data
         _.forEach(path, (key) => {
-          data = data[key]
+          targetObject = targetObject[key]
         })
         
-        if (data[lastKey] != value) {
-          data[lastKey] = value
-          this.$emit('change-data', this.data)
+        if (targetObject[lastKey] != value) {
+          targetObject[lastKey] = value
+          this.$emit('change-data', data)
         }
       },
     },

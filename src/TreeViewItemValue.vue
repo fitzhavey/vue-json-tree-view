@@ -16,7 +16,7 @@ export default {
   props: ['data', 'modifiable', 'key-string'],
   data: function(){
   	return {
-  		valueString: this.data.value.toString(),
+  		valueString: this.data.toString(),
       error: false,
   	}
   },
@@ -37,7 +37,6 @@ export default {
       }
     },
     typedValue: function(v) {
-      console.log(v)
       if (v == '') { throw 'empty' }
 
       let dataType = this.getValueType(this.data, '')
@@ -58,36 +57,35 @@ export default {
       }
     },
     getValue: function(value){
-      if (_.isNumber(value.value)) {
-        return value.value
+      if (_.isNumber(value)) {
+        return value
       }
-      if (_.isNull(value.value)) {
+      if (_.isNull(value)) {
         return "null"
       }
-      if (_.isString(value.value)) {
-        return "\""+value.value+"\"";
+      if (_.isString(value)) {
+        return "\""+value+"\"";
       }
-      return value.value;
+      return value;
     },
     getValueType: function(value, prefix="tree-view-item-value-"){
-      if (_.isNumber(value.value)) {
+      if (_.isNumber(value)) {
         return prefix + "number"
       }
-      if (_.isFunction(value.value)) {
+      if (_.isFunction(value)) {
         return prefix + "function"
       }
-      if (_.isBoolean(value.value)) {
+      if (_.isBoolean(value)) {
         return prefix + "boolean"
       }
-      if (_.isNull(value.value)) {
+      if (_.isNull(value)) {
         return prefix + "null"
       }
-      if (_.isString(value.value)) {
+      if (_.isString(value)) {
         return prefix + "string";
       }
       return prefix + "unknown";
-
-    },
+    }
   }
 }
 </script>

@@ -15,8 +15,12 @@ new Vue({
     },
     methods: {
       onChangeData: function(data) {
-        // console.log(JSON.stringify(data,  null, 2))
-        console.log('updated')
+        this.sampleJSON = data
+      }
+    },
+    watch: {
+      sampleJSON: function() {
+        console.log('updated sampleJSON')
       }
     }
 });
