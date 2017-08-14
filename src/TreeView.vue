@@ -1,12 +1,12 @@
 <template>
   <div class="tree-view-wrapper">
-    <tree-view-item class="tree-view-item-root" :data="parsedData" :max-depth="allOptions.maxDepth" :current-depth="0"></tree-view-item>
+    <tree-view-item class="tree-view-item-root" :data="parsedData" :max-depth="allOptions.maxDepth" :current-depth="0" :modifiable="allOptions.modifiable" @change-data="onChangeData"></tree-view-item>
   </div>
 </template>
 
 <script>
-  import _ from 'lodash';
-  import TreeViewItem from './TreeViewItem.vue';
+  import _ from 'lodash'
+  import TreeViewItem from './TreeViewItem.vue'
 
   export default {
     components:{
@@ -73,13 +73,30 @@
 
       isValue: function(value){
       	return !this.isObject(value) && !this.isArray(value);
-      }
+      },
+
+      onChangeData: function(path, value) {
+        let lastKey = _.last(path)
+        path = _.dropRight(_.drop(path))
+        
+        let data = _.cloneDeep(this.data)
+        let targetObject = data
+        _.forEach(path, (key) => {
+          targetObject = targetObject[key]
+        })
+        
+        if (targetObject[lastKey] != value) {
+          targetObject[lastKey] = value
+          this.$emit('change-data', data)
+        }
+      },
     },
     computed: {
       allOptions: function(){
         return _.extend({}, {
           rootObjectKey:  "root",
           maxDepth:       4,
+          modifiable:     false
         }, (this.options || {}) )
       },
     	parsedData: function(){

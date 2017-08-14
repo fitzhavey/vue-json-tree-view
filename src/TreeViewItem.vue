@@ -6,7 +6,7 @@
         <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length === 1">{{data.children.length}} property</span>
         <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length !== 1">{{data.children.length}} properties</span>
       </div>
-      <tree-view-item :key="getKey(data)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-show="isOpen()" v-for="child in data.children" :data="child"></tree-view-item>
+      <tree-view-item :key="getKey(data)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-show="isOpen()" v-for="child in data.children" :data="child" :modifiable="modifiable" @change-data="onChangeData"></tree-view-item>
     </div>
     <div v-if="isArray(data)" class="tree-view-item-leaf">
       <div class="tree-view-item-node" @click.stop="toggleOpen()">
@@ -14,22 +14,23 @@
         <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length === 1">{{data.children.length}} item</span>
         <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length !== 1">{{data.children.length}} items</span>
       </div>
-      <tree-view-item :key="getKey(data)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-show="isOpen()" v-for="child in data.children" :data="child"></tree-view-item>
+      <tree-view-item :key="getKey(data)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-show="isOpen()" v-for="child in data.children" :data="child" :modifiable="modifiable" @change-data="onChangeData"></tree-view-item>
     </div>
-    <div class="tree-view-item-leaf" v-if="isValue(data)">
-      <span class="tree-view-item-key">{{getKey(data)}}</span>
-      <span class="tree-view-item-value" :class="getValueType(data)">{{getValue(data)}}</span>
-    </div>
+    <tree-view-item-value v-if="isValue(data)" class="tree-view-item-leaf" :key-string="getKey(data)" :data="data.value" :modifiable="modifiable" @change-data="onChangeData">
+    </tree-view-item-value>
   </div>
 </template>
 
 <script>
-
   import _ from 'lodash'
+  import TreeViewItemValue from './TreeViewItemValue.vue'
 
   export default {
+    components: {
+      TreeViewItemValue
+    },
   	name: "tree-view-item",
-    props: ["data", "max-depth", "current-depth"],
+    props: ["data", "max-depth", "current-depth", "modifiable"],
     data: function(){
     	return {
       	open: this.currentDepth < this.maxDepth
@@ -58,42 +59,12 @@
   	      return "\""+ value.key + "\":";
         }
       },
-      getValue: function(value){
-      	if (_.isNumber(value.value)) {
-        	return value.value
-        }
-        if (_.isNull(value.value)) {
-        	return "null"
-        }
-        if (_.isString(value.value)) {
-          return "\""+value.value+"\"";
-        }
-      	return value.value;
-      },
-      getValueType: function(value){
-
-        var prefix= "tree-view-item-value-";
-
-        if (_.isNumber(value.value)) {
-          return prefix + "number"
-        }
-        if (_.isFunction(value.value)) {
-          return prefix + "function"
-        }
-        if (_.isBoolean(value.value)) {
-          return prefix + "boolean"
-        }
-        if (_.isNull(value.value)) {
-          return prefix + "null"
-        }
-        if (_.isString(value.value)) {
-          return prefix + "string";
-        }
-        return prefix + "unknown";
-
-      },
       isRootObject: function(value = this.data){
       	return value.isRoot;
+      },
+      onChangeData: function(path, value) {
+        path = _.concat(this.data.key, path)
+        this.$emit('change-data', path, value)
       }
     }
   };
@@ -102,7 +73,7 @@
 <style scoped>
 
 .tree-view-item {
-  font-family: monospace;
+  font-family: monaco, monospace;
   font-size: 14px;
   margin-left: 18px;
 }

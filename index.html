@@ -6,7 +6,6 @@
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     </head>
     <body>
         <style type="text/css">
@@ -59,6 +58,16 @@
               </div>
               <div class="col-sm-6">
                 <tree-view :data="sampleJSON" :options="{maxDepth: 2}"></tree-view>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <h2>Modifiable</h2>
+                <pre><code>{{sampleJSON}}</code></pre>
+              </div>
+              <div class="col-sm-6">
+                <tree-view :data="sampleJSON" :options="{modifiable: true}" v-on:change-data="onChangeData" ></tree-view>
               </div>
             </div>
         </div>

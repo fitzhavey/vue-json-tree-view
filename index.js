@@ -12,5 +12,15 @@ new Vue({
           sampleJSONString: "Just a Test String",
           sampleJSONArray: ["Just a Test String", "in a Test Array", 0, 1, true, false],
         };
+    },
+    methods: {
+      onChangeData: function(data) {
+        this.sampleJSON = data
+      }
+    },
+    watch: {
+      sampleJSON: function() {
+        console.log('updated sampleJSON')
+      }
     }
 });
