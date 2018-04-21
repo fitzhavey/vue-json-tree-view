@@ -25,6 +25,11 @@ export default {
       return this.getValue(this.data)
     }
   },
+  watch: {
+    valueFormed: function (val) {
+      this.$set(this, 'valueString', _.isString(val) ? val.replace(/^["]+|["]+$/g, '') : val)
+    }
+  },
   methods: {
     onUpdateData: function() {
       try {
