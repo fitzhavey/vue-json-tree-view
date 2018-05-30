@@ -16,7 +16,7 @@
       </div>
       <tree-view-item :key="getKey(child)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-show="isOpen()" v-for="child in data.children" :data="child" :modifiable="modifiable" @change-data="onChangeData"></tree-view-item>
     </div>
-    <tree-view-item-value v-if="isValue(data)" class="tree-view-item-leaf" :key-string="getKey(data)" :data="data.value" :modifiable="modifiable" @change-data="onChangeData">
+    <tree-view-item-value v-if="isValue(data)" class="tree-view-item-leaf" :key-string="getKey(data)" :data="data.value" :modifiable="modifiable" :auto-link="autoLink" @change-data="onChangeData">
     </tree-view-item-value>
   </div>
 </template>
@@ -30,7 +30,7 @@
       TreeViewItemValue
     },
   	name: "tree-view-item",
-    props: ["data", "max-depth", "current-depth", "modifiable"],
+    props: ["data", "max-depth", "current-depth", "modifiable", "auto-link"],
     data: function(){
     	return {
       	open: this.currentDepth < this.maxDepth

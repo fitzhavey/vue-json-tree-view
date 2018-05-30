@@ -1,6 +1,6 @@
 <template>
   <div class="tree-view-wrapper">
-    <tree-view-item class="tree-view-item-root" :data="parsedData" :max-depth="allOptions.maxDepth" :current-depth="0" :modifiable="allOptions.modifiable" @change-data="onChangeData"></tree-view-item>
+    <tree-view-item class="tree-view-item-root" :data="parsedData" :max-depth="allOptions.maxDepth" :current-depth="0" :modifiable="allOptions.modifiable" :auto-link="allOptions.autoLink" @change-data="onChangeData"></tree-view-item>
   </div>
 </template>
 
@@ -78,13 +78,13 @@
       onChangeData: function(path, value) {
         let lastKey = _.last(path)
         path = _.dropRight(_.drop(path))
-        
+
         let data = _.cloneDeep(this.data)
         let targetObject = data
         _.forEach(path, (key) => {
           targetObject = targetObject[key]
         })
-        
+
         if (targetObject[lastKey] != value) {
           targetObject[lastKey] = value
           this.$emit('change-data', data)
@@ -96,7 +96,8 @@
         return _.extend({}, {
           rootObjectKey:  "root",
           maxDepth:       4,
-          modifiable:     false
+          modifiable:     false,
+          autoLink: false
         }, (this.options || {}) )
       },
     	parsedData: function(){

@@ -12,8 +12,8 @@
 import _ from 'lodash'
 
 export default {
-	name: 'tree-view-item',
-  props: ['data', 'modifiable', 'key-string'],
+    name: 'tree-view-item',
+    props: ['data', 'modifiable', 'key-string'],
   data: function(){
   	return {
   		valueString: this.data && this.data.toString(),
@@ -69,10 +69,10 @@ export default {
         return "null"
       }
       if (_.isString(value)) {
-        if (this.modifiable) {
-            return "\""+value+"\"";
+        if (this.autoLink && !this.modifiable) {
+            return "\""+this.linkify(value)+"\"";
         }
-        return "\""+this.linkify(value)+"\"";
+        return "\""+value+"\"";
       }
       return value;
     },
