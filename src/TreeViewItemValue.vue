@@ -13,7 +13,7 @@ import _ from 'lodash'
 
 export default {
     name: 'tree-view-item',
-    props: ['data', 'modifiable', 'key-string'],
+    props: ['data', 'modifiable', 'key-string', 'auto-link'],
   data: function(){
   	return {
   		valueString: this.data && this.data.toString(),
