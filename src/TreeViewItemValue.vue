@@ -1,9 +1,9 @@
 <template>
   <div>
-    <span class="tree-view-item-key">{{keyString}}</span>
+    <span class="tree-view-item-key" v-once>{{keyString}}</span>
     <input v-if="modifiable" class="tree-view-item-value" :class="getValueType(data)" v-model="valueString" @keyup.enter="onUpdateData" @blur="onUpdateData">
-    <span v-else class="tree-view-item-value" :class="getValueType(data)">{{ valueFormed }}</span>
-    <span v-show="error">{{ error }}</span>
+    <span v-else class="tree-view-item-value" :class="getValueType(data)" v-once>{{ valueFormed }}</span>
+    <span v-show="error" v-once>{{ error }}</span>
   </div>
 </template>
 
