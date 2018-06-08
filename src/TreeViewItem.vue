@@ -4,7 +4,7 @@
       <div class="tree-view-item-node" @click.stop="toggleOpen()" >
         <span :class="{opened: isOpen()}" class="tree-view-item-key tree-view-item-key-with-chevron" v-once>{{getKey(data)}}</span>
         <span class="tree-view-item-hint" v-if="!isOpen() && data.children.length === 1" v-once>{{data.children.length}} property</span>
-        <span class="tree-view-item-hint" v-if="!isOpen() && data.children.length > 1" v-once>{{data.children.length}} properties</span>
+        <span class="tree-view-item-hint" v-if="!isOpen() && data.children.length !== 1" v-once>{{data.children.length}} properties</span>
       </div>
       <tree-view-item :key="getKey(child)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-if="isOpen()" v-for="child in data.children" :data="child"></tree-view-item>
     </div>
@@ -12,7 +12,7 @@
       <div class="tree-view-item-node" @click.stop="toggleOpen()">
         <span :class="{opened: isOpen()}"  class="tree-view-item-key tree-view-item-key-with-chevron" v-once>{{getKey(data)}}</span>
         <span class="tree-view-item-hint" v-if="!isOpen() && data.children.length === 1" v-once>{{data.children.length}} item</span>
-        <span class="tree-view-item-hint" v-if="!isOpen() && data.children.length > 1" v-once>{{data.children.length}} items</span>
+        <span class="tree-view-item-hint" v-if="!isOpen() && data.children.length !== 1" v-once>{{data.children.length}} items</span>
       </div>
       <tree-view-item :key="getKey(child)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-if="isOpen()" v-for="child in data.children" :data="child"></tree-view-item>
     </div>
@@ -33,7 +33,7 @@
     props: ["data", "max-depth", "current-depth", "modifiable"],
     data: function(){
     	return {
-      	open: this.currentDepth < 1
+      	open: this.currentDepth < this.maxDepth
       }
     },
     methods: {
