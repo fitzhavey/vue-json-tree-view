@@ -3,20 +3,20 @@
     <div v-if="isObject(data)" class="tree-view-item-leaf">
       <div class="tree-view-item-node" @click.stop="toggleOpen()" >
         <span :class="{opened: isOpen()}" class="tree-view-item-key tree-view-item-key-with-chevron">{{getKey(data)}}</span>
-        <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length === 1">{{data.children.length}} property</span>
-        <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length !== 1">{{data.children.length}} properties</span>
+        <span class="tree-view-item-hint" v-if="!isOpen() && data.children.length === 1" v-once>{{data.children.length}} property</span>
+        <span class="tree-view-item-hint" v-if="!isOpen() && data.children.length !== 1" v-once>{{data.children.length}} properties</span>
       </div>
-      <tree-view-item :key="getKey(child)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-show="isOpen()" v-for="child in data.children" :data="child" :modifiable="modifiable" @change-data="onChangeData"></tree-view-item>
+      <tree-view-item :key="getKey(child)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-if="isOpen()" v-for="child in data.children" :data="child"></tree-view-item>
     </div>
     <div v-if="isArray(data)" class="tree-view-item-leaf">
       <div class="tree-view-item-node" @click.stop="toggleOpen()">
         <span :class="{opened: isOpen()}"  class="tree-view-item-key tree-view-item-key-with-chevron">{{getKey(data)}}</span>
-        <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length === 1">{{data.children.length}} item</span>
-        <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length !== 1">{{data.children.length}} items</span>
+        <span class="tree-view-item-hint" v-if="!isOpen() && data.children.length === 1" v-once>{{data.children.length}} item</span>
+        <span class="tree-view-item-hint" v-if="!isOpen() && data.children.length !== 1" v-once>{{data.children.length}} items</span>
       </div>
-      <tree-view-item :key="getKey(child)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-show="isOpen()" v-for="child in data.children" :data="child" :modifiable="modifiable" @change-data="onChangeData"></tree-view-item>
+      <tree-view-item :key="getKey(child)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-if="isOpen()" v-for="child in data.children" :data="child"></tree-view-item>
     </div>
-    <tree-view-item-value v-if="isValue(data)" class="tree-view-item-leaf" :key-string="getKey(data)" :data="data.value" :modifiable="modifiable" @change-data="onChangeData">
+    <tree-view-item-value v-if="isValue(data)" class="tree-view-item-leaf" :key-string="getKey(data)" :data="data.value">
     </tree-view-item-value>
   </div>
 </template>
@@ -61,10 +61,6 @@
       },
       isRootObject: function(value = this.data){
       	return value.isRoot;
-      },
-      onChangeData: function(path, value) {
-        path = _.concat(this.data.key, path)
-        this.$emit('change-data', path, value)
       }
     }
   };
