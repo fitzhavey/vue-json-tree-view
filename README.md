@@ -44,12 +44,14 @@ The defaults are:
 {
   maxDepth: 4,
   rootObjectKey: "root",
-  modifiable: false
+  modifiable: false,
+  link: false
 }
 ```
 - maxDepth: The maximum number of levels of the JSON Tree that should be expanded by default. Expects an Integer from 0 to Infinity.
-- rootObjectKey: the name of the Root Object, will default to `root`
-- modifiable: To modify the json value. 
+- rootObjectKey: the name of the Root Object, will default to `root`.
+- modifiable: To modify the json value.
+- link: URL strings will appear as clickable links (unless `modifiable="true"`).
 
 ## Event
 
