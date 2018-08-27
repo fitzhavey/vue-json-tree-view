@@ -78,6 +78,13 @@ If `modifiable` is true and you want to take the updated json data, you must reg
 
 All leaves will have their type indicated as a CSS class, like `tree-view-item-value-string`. Supported types: String, Number, Function, Boolean and Null Values.
 
+Keys can also be styled. For instance to make labels red:
+```
+.tree-view-item-key {
+    color: red;
+}
+```
+
 ## Notes
 
 Enjoy.
