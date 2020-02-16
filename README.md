@@ -2,6 +2,8 @@
 
 ![a demonstration](https://raw.githubusercontent.com/arvidkahl/vue-json-tree-view/master/header.png)
 
+_If you'd like to contribute to this project, please raise an issue and we can add you to the contributors_
+
 
 ## Demo and Blogpost
 
