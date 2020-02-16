@@ -50,7 +50,7 @@
     "karma-spec-reporter": "0.0.26",
     "karma-verbose-reporter": "0.0.3",
     "karma-webpack": "^1.8.0",
-    "node-sass": "^3.4.2",
+    "node-sass": "^4.13.1",
     "phantomjs": "^2.1.7",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
