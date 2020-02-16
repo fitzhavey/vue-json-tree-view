@@ -86,11 +86,8 @@ Keys can also be styled. For instance to make labels red:
 }
 ```
 
-## Notes
+## Contributing
 
-Enjoy.
+Contributions to this repo are very welcome as they are what has helped it become what it is today. Simply raise an issue with new ideas or submit a pull request.
 
-## Changelog
-
-- 2.0.0: Moved prop based option into `options` object. Added CSS for leaf types. Support for raw values as data.
-- 1.0.0: Initial Release
+A github action automatically deploys changes when they are merged into the master branch.
