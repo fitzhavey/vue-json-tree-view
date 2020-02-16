@@ -1,6 +1,6 @@
 <template>
   <div class="tree-view-wrapper">
-    <tree-view-item class="tree-view-item-root" :data="parsedData" :max-depth="allOptions.maxDepth" :current-depth="0" :modifiable="allOptions.modifiable" :link="allOptions.link" @change-data="onChangeData"></tree-view-item>
+    <tree-view-item class="tree-view-item-root" :data="parsedData" :max-depth="allOptions.maxDepth" :current-depth="0" :modifiable="allOptions.modifiable" :link="allOptions.link" :limit-render-depth="allOptions.limitRenderDepth" @change-data="onChangeData"></tree-view-item>
   </div>
 </template>
 
@@ -96,6 +96,7 @@
         return _.extend({}, {
           rootObjectKey:  "root",
           maxDepth:       4,
+          limitRenderDepth:    false,
           modifiable:     false,
           link: false
         }, (this.options || {}) )
