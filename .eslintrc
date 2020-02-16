@@ -4,11 +4,12 @@
 		"mocha": true
 	},
 	"extends": [
-			"plugin:vue/essential",
-			"google"
+		"plugin:vue/essential",
+		"google"
 	],
-	"parser": "babel-eslint",
+	"parser": "vue-eslint-parser",
 	"parserOptions": {
+		"parser": "babel-eslint",
 		"sourceType": "module"
 	},
 	"rules": {
@@ -25,6 +26,6 @@
 		"no-new": 0,
 
 		// more manageable max line length
-		"max-len": 140
+		"max-len": ["error", { "code": 160 }]
 	}
 }

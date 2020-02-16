@@ -9,103 +9,108 @@
 
 
 <script>
-import _ from 'lodash'
+import _ from 'lodash';
 
 export default {
-    name: 'tree-view-item',
-    props: ['data', 'modifiable', 'key-string', 'link'],
-  data: function(){
-  	return {
-  		valueString: this.data && this.data.toString(),
+  name: 'tree-view-item',
+  props: ['data', 'modifiable', 'key-string', 'link'],
+  data: function() {
+    return {
+      valueString: this.data && this.data.toString(),
       error: false,
-  	}
+    };
   },
   computed: {
-    valueFormed: function () {
-      return this.getValue(this.data)
-    }
+    valueFormed: function() {
+      return this.getValue(this.data);
+    },
   },
   watch: {
-    valueFormed: function (val) {
-      this.$set(this, 'valueString', _.isString(val) ? val.replace(/^["]+|["]+$/g, '') : val)
-    }
+    valueFormed: function(val) {
+      this.$set(this, 'valueString', _.isString(val) ? val.replace(/^["]+|["]+$/g, '') : val);
+    },
   },
   methods: {
     onUpdateData: function() {
       try {
-        let v = this.typedValue(this.valueString)
-        this.error = false
-        this.$emit('change-data', [], v)
-      }
-      catch (err) {
-        this.error = err
+        const v = this.typedValue(this.valueString);
+        this.error = false;
+        this.$emit('change-data', [], v);
+      } catch (err) {
+        this.error = err;
       }
     },
     typedValue: function(v) {
-      if (v == '') { throw 'empty' }
+      if (v == '') {
+        throw new Error('empty');
+      }
 
-      let dataType = this.getValueType(this.data, '')
+      const dataType = this.getValueType(this.data, '');
 
       switch (dataType) {
         case 'number':
           if (_.isNaN(_.toNumber(v))) {
-            throw 'only number'
+            throw new Error('only number');
           }
-          return _.toNumber(v)
+          return _.toNumber(v);
         case 'boolean':
-          if (v.toLowerCase() === 'true') { return true }
-          if (v.toLowerCase() === 'false') { return false }
-          throw 'true or false'
+          if (v.toLowerCase() === 'true') {
+            return true;
+          }
+          if (v.toLowerCase() === 'false') {
+            return false;
+          }
+          throw new Error('true or false');
         case 'string':
         default:
-          return v
+          return v;
       }
     },
-    getValue: function(value){
+    getValue: function(value) {
       if (_.isNumber(value)) {
-        return value
+        return value;
       }
       if (_.isNull(value)) {
-        return "null"
+        return 'null';
       }
       if (_.isString(value)) {
         if (this.link && !this.modifiable) {
-            return "\""+this.linkify(value)+"\"";
+          return '"'+this.linkify(value)+'"';
         }
-        return "\""+value+"\"";
+        return '"'+value+'"';
       }
       return value;
     },
     linkify(inputText) {
-        // URLs starting with http://, https://, or ftp://
-        const replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
-        let replacedText = inputText.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
-        // URLs starting with www. (without // before it, or it'd re-link the ones done above)
-        const replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
-        replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
-        // Change email addresses to mailto:: links
-        const replacePattern3 = /([\w\.]+@[a-zA-Z_]+?(\.[a-zA-Z]{2,6})+)/gim;
-        replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
-        return replacedText;
+      // URLs starting with http://, https://, or ftp://
+      const replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+      let replacedText = inputText.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
+      // URLs starting with www. (without // before it, or it'd re-link the ones done above)
+      const replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+      replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
+      // Change email addresses to mailto:: links
+      const replacePattern3 = /([\w\.]+@[a-zA-Z_]+?(\.[a-zA-Z]{2,6})+)/gim;
+      replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
+      return replacedText;
     },
-    getValueType: function(value, prefix="tree-view-item-value-"){
+    getValueType: function(value, prefix='tree-view-item-value-') {
       if (_.isNumber(value)) {
-        return prefix + "number"
+        return prefix + 'number';
       }
       if (_.isFunction(value)) {
-        return prefix + "function"
+        return prefix + 'function';
       }
       if (_.isBoolean(value)) {
-        return prefix + "boolean"
+        return prefix + 'boolean';
       }
       if (_.isNull(value)) {
-        return prefix + "null"
+        return prefix + 'null';
       }
       if (_.isString(value)) {
-        return prefix + "string";
+        return prefix + 'string';
       }
-      return prefix + "unknown";
-    }
-  }
-}
+      return prefix + 'unknown';
+    },
+  },
+};
 </script>
