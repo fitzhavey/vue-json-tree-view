@@ -1,14 +1,30 @@
 {
-  "env": {
-    "es6": true,
-    "mocha": true
-  },
-  "extends": "vue",
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "sourceType": "module"
-  },
-  "rules": {
-    "semi": ["error", "always"]
-  }
+	"env": {
+		"es6": true,
+		"mocha": true
+	},
+	"extends": [
+			"plugin:vue/essential",
+			"google"
+	],
+	"parser": "babel-eslint",
+	"parserOptions": {
+		"sourceType": "module"
+	},
+	"rules": {
+		// require semicolons
+		"semi": ["error", "always"],
+
+		// don't concern ourselves with line endings
+		"linebreak-style": 0,
+
+		// don't error if no jsdoc provided
+		"require-jsdoc": 0,
+
+		// allow use of "new Vue(...)"
+		"no-new": 0,
+
+		// more manageable max line length
+		"max-len": 140
+	}
 }

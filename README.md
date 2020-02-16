@@ -87,7 +87,6 @@ Keys can also be styled. For instance to make labels red:
 ```
 
 ## Contributing
-
 Contributions to this repo are very welcome as they are what has helped it become what it is today. Simply raise an issue with new ideas or submit a pull request.
 
 A github action automatically deploys changes when they are merged into the master branch.
