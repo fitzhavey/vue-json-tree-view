@@ -1,0 +1,57 @@
+# Publish on push to master branch
+#
+#	1. increment the version in package.json
+#	2. push the new version to the master branch
+#	3. build the project
+#	4. publish the project
+
+# It relies on the `NPM_TOKEN` secret being available in this repo.
+
+name: publish
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build-and-publish:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Increment project version
+      run: |
+        npm version patch
+
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "increment package version" -a
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build project
+      run: |
+        npm ci
+        npm run build
+
+    - name: Publish project
+      run: |
+        echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+        npm publish --access public
