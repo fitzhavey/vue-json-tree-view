@@ -44,8 +44,8 @@ jobs:
         npm ci
         npm run build
 
-    - name: Commit changes
-      run: git commit -m "increment package version" -a
+    - name: Commit changes (if any)
+      run: git commit -m "increment package version" -a || echo "No changes to commit"
 
     - name: Push changes
       uses: ad-m/github-push-action@master
