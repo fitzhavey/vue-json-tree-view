@@ -1,76 +1,76 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Vue Component</title>
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
-    <body>
-        <style type="text/css">
-          .tree-view-item-value-number {
-            color: green;
-          }
-          .tree-view-item-value-string {
-            color: blue;
-          }
-          .tree-view-item-value-boolean {
-            color: violet;
-          }
-        </style>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue Component</title>
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<style type="text/css">
+			.tree-view-item-value-number {
+				color: green;
+			}
+			.tree-view-item-value-string {
+				color: blue;
+			}
+			.tree-view-item-value-boolean {
+				color: violet;
+			}
+		</style>
 
-        <div id="container" class="container">
+		<div id="container" class="container">
 
-            <div class="row">
-              <div class="col-sm-6">
-                <h2>Test String, some Max Depth, Named Root Object</h2>
-                <pre><code>{{sampleJSONString}}</code></pre>
-              </div>
-              <div class="col-sm-6">
-                <tree-view :data="sampleJSONString" :options="{maxDepth: 2, rootObjectKey: 'The Test String'}"></tree-view>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <h2>Test Array, some Max Depth, Named Root Object, and Auto Linking</h2>
-                <pre><code>{{sampleJSONArray}}</code></pre>
-              </div>
-              <div class="col-sm-6">
-                <tree-view :data="sampleJSONArray" :options="{maxDepth: 2, rootObjectKey: 'The Test Array', link: true}"></tree-view>
-              </div>
-            </div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h2>Test String, some Max Depth, Named Root Object</h2>
+					<pre><code>{{sampleJSONString}}</code></pre>
+				</div>
+				<div class="col-sm-6">
+					<tree-view :data="sampleJSONString" :options="{maxDepth: 2, rootObjectKey: 'The Test String'}"></tree-view>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h2>Test Array, some Max Depth, Named Root Object, and Auto Linking</h2>
+					<pre><code>{{sampleJSONArray}}</code></pre>
+				</div>
+				<div class="col-sm-6">
+					<tree-view :data="sampleJSONArray" :options="{maxDepth: 2, rootObjectKey: 'The Test Array', link: true}"></tree-view>
+				</div>
+			</div>
 
-            <div class="row">
-              <div class="col-sm-6">
-                <h2>No Max Depth, Named Root Object</h2>
-                <pre><code>{{sampleJSON}}</code></pre>
-              </div>
-              <div class="col-sm-6">
-                <tree-view :data="sampleJSON" :options="{maxDepth: 0, rootObjectKey: 'The named Object'}"></tree-view>
-              </div>
-            </div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h2>No Max Depth, Named Root Object</h2>
+					<pre><code>{{sampleJSON}}</code></pre>
+				</div>
+				<div class="col-sm-6">
+					<tree-view :data="sampleJSON" :options="{maxDepth: 0, rootObjectKey: 'The named Object'}"></tree-view>
+				</div>
+			</div>
 
-            <div class="row">
-              <div class="col-sm-6">
-                <h2>Max Depth set to 2</h2>
-                <pre><code>{{sampleJSON}}</code></pre>
-              </div>
-              <div class="col-sm-6">
-                <tree-view :data="sampleJSON" :options="{maxDepth: 2}"></tree-view>
-              </div>
-            </div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h2>Max Depth set to 2</h2>
+					<pre><code>{{sampleJSON}}</code></pre>
+				</div>
+				<div class="col-sm-6">
+					<tree-view :data="sampleJSON" :options="{maxDepth: 2}"></tree-view>
+				</div>
+			</div>
 
-            <div class="row">
-              <div class="col-sm-6">
-                <h2>Modifiable</h2>
-                <pre><code>{{sampleJSON}}</code></pre>
-              </div>
-              <div class="col-sm-6">
-                <tree-view :data="sampleJSON" :options="{modifiable: true}" v-on:change-data="onChangeData" ></tree-view>
-              </div>
-            </div>
-        </div>
-        <script type="text/javascript" src="/build/build.js"></script>
-    </body>
+			<div class="row">
+				<div class="col-sm-6">
+					<h2>Modifiable</h2>
+					<pre><code>{{sampleJSON}}</code></pre>
+				</div>
+				<div class="col-sm-6">
+					<tree-view :data="sampleJSON" :options="{modifiable: true}" v-on:change-data="onChangeData" ></tree-view>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="/build/build.js"></script>
+	</body>
 </html>
