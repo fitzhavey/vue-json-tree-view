@@ -41,10 +41,10 @@ And then add it to your template:
 
 ## Properties
 Customisation of the tree is configured with the following properties:
-| Name    | Default      | Description         |
-|---------|--------------|---------------------|
-| data    | **required** | JS object to render |
-| options | `{}`         | _documented below_  |
+| Name    | Default      | Description                                                 |
+|---------|--------------|-------------------------------------------------------------|
+| data    | **required** | JS object to render (accepts `Object` / `String` / `Array`) |
+| options | `{}`         | _documented below_                                          |
 
 The options object contains the following properties, shown with default values below:
 ```js
@@ -73,9 +73,9 @@ The options object contains the following properties, shown with default values 
 
 ## Events
 
-| Name       | Description                  | Params                            |
-|------------|------------------------------|-----------------------------------|
-| changeData | Fired when the JSON is updated (if `modifiable="true"` ) | `data`: the new value of the JSON |
+| Name       | Description                                              | Params                            |
+|------------|----------------------------------------------------------|-----------------------------------|
+| changeData | Fired when the JSON is updated (if `modifiable="true"`) | `data`: the new value of the JSON |
 
 
 ## Styling
