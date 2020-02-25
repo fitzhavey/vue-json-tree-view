@@ -32,8 +32,12 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Increment project version
+      run: npm version patch
+
+    - name: Build project
       run: |
-        npm version patch
+        npm ci
+        npm run build
 
     - name: Commit changes
       run: |
@@ -45,11 +49,6 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Build project
-      run: |
-        npm ci
-        npm run build
 
     - name: Publish project
       run: |
