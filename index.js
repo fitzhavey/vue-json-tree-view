@@ -20,7 +20,7 @@ new Vue({ // eslint-disable-line no-new
 	},
 	watch: {
 		sampleJSON() {
-			console.log('updated sampleJSON');
+			alert('updated sampleJSON'); // eslint-disable-line no-alert
 		}
 	}
 });
