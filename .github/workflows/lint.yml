@@ -1,0 +1,60 @@
+# Lint all branches but master
+#
+#	1. lint the project
+#	2. commit any fixes
+#	3. push the changes
+#
+# It relies on the `GITHUB_TOKEN` secret being available in this repo (available by default)
+
+name: lint
+
+on:
+  push:
+    branches-ignore:
+    - master
+
+jobs:
+  lint-and-commit:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install and Lint
+      run: |
+        npm ci
+        npm run lint --fix
+
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git diff-index --quiet HEAD || git commit -m "automated linting fix-ups" -a
+
+
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
+
+    - name: Ensure we have latest changes
+      run: |
+        git rebase origin/${{ steps.extract_branch.outputs.branch }}
+        git pull
+        git fetch
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ steps.extract_branch.outputs.branch }}

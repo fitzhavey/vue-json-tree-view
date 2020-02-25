@@ -31,6 +31,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
+    - name: Set up git credentials
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+
     - name: Increment project version
       run: npm version patch
 
@@ -40,10 +45,7 @@ jobs:
         npm run build
 
     - name: Commit changes
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git commit -m "increment package version" -a
+      run: git commit -m "increment package version" -a
 
     - name: Push changes
       uses: ad-m/github-push-action@master
