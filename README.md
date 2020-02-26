@@ -4,7 +4,7 @@ A Vue component to render JSON data in a collapsable tree.
 
 ## Installation
 
-Install [vue-json-tree-vue](https://www.npmjs.com/package/vue-json-tree-view):
+Install [vue-json-tree-view](https://www.npmjs.com/package/vue-json-tree-view):
 ```bash
 npm install --save vue-json-tree-view
 ```
