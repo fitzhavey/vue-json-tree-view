@@ -1,5 +1,5 @@
--<template>
-	<div>
+<template>
+	<div class="tree-view-item-leaf-value">
 		<span class="tree-view-item-key">{{keyString}}</span>
 		<input
 			v-if="modifiable"
