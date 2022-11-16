@@ -8,7 +8,8 @@
 			v-model="valueString"
 			@keyup.enter="onUpdateData"
 			@blur="onUpdateData"/>
-		<span v-else class="tree-view-item-value" :class="getValueType(data)" v-html="valueFormed"/>
+    <component v-else-if="!!formatter" :is="valueFormed" :value="data"/>
+		<div v-else class="tree-view-item-value" :class="getValueType(data)" v-html="valueFormed"/>
 		<span v-show="error">{{ error }}</span>
 	</div>
 </template>
@@ -19,7 +20,7 @@ import _ from 'lodash';
 
 export default {
 	name: 'tree-view-item',
-	props: ['data', 'modifiable', 'key-string', 'link'],
+	props: ['data', 'modifiable', 'key-string', 'link', 'formatter'],
 	data() {
 		return {
 			valueString: this.data && this.data.toString(),
@@ -73,6 +74,9 @@ export default {
 			}
 		},
 		getValue(value) {
+			if (this.formatter && !this.modifiable) {
+				return this.formatter(value);
+			}
 			if (_.isNumber(value)) {
 				return value;
 			}

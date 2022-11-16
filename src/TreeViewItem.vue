@@ -17,6 +17,7 @@
 			:modifiable="modifiable"
 			:link="link"
 			:limit-render-depth="limitRenderDepth"
+      :formatter="formatter"
 			@change-data="onChangeData"/>
 		</div>
 	</div>
@@ -37,6 +38,7 @@
 			:modifiable="modifiable"
 			:link="link"
 			:limit-render-depth="limitRenderDepth"
+      :formatter="formatter"
 			@change-data="onChangeData"/>
 		</div>
 	</div>
@@ -47,6 +49,7 @@
 		:data="data.value"
 		:modifiable="modifiable"
 		:link="link"
+    :formatter="formatter"
 		@change-data="onChangeData"/>
 	</div>
 </template>
@@ -60,7 +63,7 @@ export default {
 		TreeViewItemValue
 	},
 	name: 'tree-view-item',
-	props: ['data', 'max-depth', 'current-depth', 'modifiable', 'link', 'limit-render-depth'],
+	props: ['data', 'max-depth', 'current-depth', 'modifiable', 'link', 'limit-render-depth', 'formatter'],
 	data() {
 		return {
 			open: this.currentDepth < this.maxDepth

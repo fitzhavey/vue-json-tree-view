@@ -8,6 +8,7 @@
 			:modifiable="allOptions.modifiable"
 			:link="allOptions.link"
 			:limit-render-depth="allOptions.limitRenderDepth"
+      :formatter="allOptions.formatter"
 			@change-data="onChangeData"/>
 	</div>
 </template>
@@ -106,7 +107,8 @@ export default {
 				maxDepth: 4,
 				limitRenderDepth: false,
 				modifiable: false,
-				link: false
+				link: false,
+				formatter: null
 			}, (this.options || {}));
 		},
 		parsedData() {
