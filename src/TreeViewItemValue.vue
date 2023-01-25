@@ -58,7 +58,10 @@ export default {
 					if (_.isNaN(_.toNumber(v))) {
 						throw new Error('only number');
 					}
-					return _.toNumber(v);
+					if (v > Number.MAX_SAFE_INTEGER) {
+					  return v.toString();
+          }
+          return _.toNumber(v);
 				case 'boolean':
 					if (v.toLowerCase() === 'true') {
 						return true;
@@ -113,6 +116,9 @@ export default {
 				return `${prefix}null`;
 			}
 			if (_.isString(value)) {
+        if (/^\d+$/.test(value)) {
+          return `${prefix}number`;
+        }
 				return `${prefix}string`;
 			}
 			return `${prefix}unknown`;
