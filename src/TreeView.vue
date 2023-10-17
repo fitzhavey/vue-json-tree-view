@@ -21,7 +21,7 @@ export default {
 		TreeViewItem
 	},
 	name: 'tree-view',
-	props: ['data', 'options'],
+	props: ['data', 'options', 'open-child-details'],
 	methods: {
 
 		// Transformer for the non-Collection types,
@@ -97,8 +97,35 @@ export default {
 				targetObject[lastKey] = value;
 				this.$emit('change-data', data);
 			}
-		}
+		},
+		
+		/**
+		 * Recursively sets the 'isOpen' property in each element to open nested children by default based on the provided 'openChildDetails'.
+		 * @param {object} data - The data to process.
+		 * @param {boolean} childExist - Indicates if the current item should be open.
+		 * @param {boolean} defaultSelect - Indicates if the default selection is open.
+		 * @returns {object} - The processed data with 'isOpen' property.
+		 */
+		defaultChildrenOpen(data, childExist = false, defaultSelect = false) {
+			const { openKey, uniqueKey } = this.openChildDetails || {}
+			const { children, key } = data || {}
+
+			if (!openKey) {
+				return data;
+			}
+			const childUniqueExist = children?.some((child) => child.key === uniqueKey.key && child.value.includes(uniqueKey.value))
+			const findKey = children?.some((child) => child.key === openKey)
+
+			const childrenFound = children?.map((child) => this.defaultChildrenOpen(child, childUniqueExist && findKey, childExist && key === openKey));
+			const isAnyChildOpen = childrenFound?.some((c) => c.isOpen);
+
+			const isOpen = (!children || !children.length) ? ((childExist && key == openKey) || defaultSelect) : (!!isAnyChildOpen || (childExist && key === openKey) || defaultSelect)
+			return {
+				...data, ...(children ? { children: childrenFound } : {}), isOpen
+			}
+		},
 	},
+
 	computed: {
 		allOptions() {
 			return _.extend({}, {
@@ -116,11 +143,11 @@ export default {
 			// Strings or Integers should not be attempted to be split, so we generate
 			// a new object with the string/number as the value
 			if (this.isValue(this.data)) {
-				return this.transformValue(this.data, this.allOptions.rootObjectKey);
+				return this.defaultChildrenOpen(this.transformValue(this.data, this.allOptions.rootObjectKey));
 			}
 
 			// If it's an object or an array, transform as an object
-			return this.transformObject(this.data, this.allOptions.rootObjectKey, true);
+			return this.defaultChildrenOpen(this.transformObject(this.data, this.allOptions.rootObjectKey, true));
 		}
 	}
 };

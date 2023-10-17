@@ -54,6 +54,49 @@ The defaults are:
 - link: URL strings will appear as clickable links (unless `modifiable="true"`).
 - limitRenderDepth: maximum number of nodes that should be rendered (for very large JSONs)
 
+#### `open-child-details`
+
+```
+{
+  openKey:"Contact",
+  uniqueKey:{
+    key:"Name",
+    value:"John Doe"
+  }
+}
+```
+- The `open-child-details` component is used to specify the default open state of a nested data. It has two main properties:
+- `openKey`: This property represents the exact name of the key or node that you want to be opened by default.
+- `uniqueKey`: This property is used to identify the exact `openKey` when you have multiple instances of the openKey existing in different children of the data. It consists of two sub-properties:
+- `key`: The key within the data that you want to use as the unique identifier.
+- `value`: The value of the unique identifier.
+
+```{ State: "NY",
+  City: "NY",
+  Count: 25
+  Citizens: [{
+    Name: "John Doe",
+    Contact: [1234567890, 0987654321]
+  },
+  {
+    Name: "Jane Doe",
+    Contact: [1122334455, 0099887766]
+  }]
+}
+```
+
+- In this example, To open John Doe Citizen's contact information using their name as the unique identifier, provide the following props:
+
+```
+{
+  openKey:"Contact",
+  uniqueKey:{
+    key:"Name",
+    value:"John Doe"
+  }
+}
+```
+
 ## Event
 
 #### updated json data

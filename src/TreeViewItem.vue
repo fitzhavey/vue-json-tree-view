@@ -66,6 +66,18 @@ export default {
 			open: this.currentDepth < this.maxDepth
 		};
 	},
+
+	watch: {
+		data: {
+			handler(newValue) {
+				// Open the "open" key in JSON view if "isOpen" is truthy.
+				if (newValue?.isOpen) this.open = true;
+				// Close the "open" key in JSON view if "isOpen" is explicitly set to false.
+				else if (newValue?.isOpen === false) this.open = false
+			},
+			immediate: true
+		}
+	},
 	methods: {
 		isOpen() {
 			return this.open;
